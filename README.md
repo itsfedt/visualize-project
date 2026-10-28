@@ -57,6 +57,10 @@ allows it. If rendering is unavailable, it must report incomplete verification.
 
 [Project-only installation, updates, uninstall, and troubleshooting](visualize-project-skill/INSTALL.md)
 
+## Visual style
+
+The default visual direction is an icon-led infographic on white, with a single coral accent, short labels, and directed flows. Overview output includes an editable `project-overview-infographic.svg` companion alongside the portable Mermaid diagram. PNG export is included when available. The agent must inspect both outputs; style instructions alone do not guarantee rendering quality.
+
 ## Output and verification
 
 Expected overview output in the analyzed repository:

@@ -220,15 +220,13 @@ A component view is warranted when a container has several meaningful internal r
 
 ## Visual style
 
-Use a hybrid of:
-- colorful teaching diagram;
-- disciplined enterprise architecture diagram.
+Default to an icon-led, single-accent infographic on white, following `references/visual-language.md`. Use short labels, recognizable monochrome pictograms, and clearly directed flows. Preserve architecture evidence and meaningful boundaries. Honor an explicit user style override.
 
 Every diagram must:
 - have a descriptive title and scope;
 - omit color legends and color-key panels; use clear node labels and named boundaries;
 - use icons where they aid recognition;
-- use a consistent semantic color palette;
+- use a consistent single accent color by default; distinguish categories through icons, labels, and boundaries;
 - label every meaningful arrow;
 - include protocol/technology on inter-process relationships when known;
 - distinguish external systems from project-owned systems;
@@ -236,7 +234,7 @@ Every diagram must:
 - use boundaries/subgraphs for application, network, trust, environment, or ownership boundaries where relevant;
 - remain readable without requiring a long narrative.
 
-Prefer portable emoji/icon labels when renderer-specific icon packs are unavailable.
+Prefer monochrome vector pictograms. Use text or simple geometric symbols when icons are unavailable; multicolor emoji are a fallback only when the requested style permits them. For a reference-like presentation image, follow the companion SVG workflow in `references/visual-language.md`.
 
 ---
 

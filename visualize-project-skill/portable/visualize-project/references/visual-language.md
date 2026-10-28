@@ -1,8 +1,28 @@
 # Visual Language
 
-Use a hybrid of colorful teaching clarity and enterprise architecture discipline.
+Default to a compact, icon-led infographic: white background, one coral/rose accent (for example `#F73562`), recognizable monochrome pictograms, short labels beneath icons, and a clear visual flow. Honor user-supplied styles. Treat reference images as visual direction, never evidence for the project's components or connections.
 
-## Semantic palette
+## Reference-style composition
+
+- Prefer open icon-and-label nodes over large filled cards. Use a coherent outline or solid icon family; circles may anchor actors and outcomes.
+- Use a generous canvas (normally at least 1200 px wide), consistent icon size and stroke weight, and labels readable at the intended display size. Keep labels to two short lines when practical; put detail in accompanying documentation.
+- Route flows left to right; use a second row only when arrowheads make the reading order unambiguous. Keep branches separated and avoid crossings or connectors running through labels.
+- Use the accent for icons and connectors. Use darker text when the accent lacks sufficient contrast at small sizes. Avoid gradients, shadows, decorative panels, and color legends by default.
+- Small connector dots may echo a reference, but must not resemble extra nodes or obscure arrowheads. Preserve solid/dashed semantics and explicit labels where needed.
+- Preserve ownership/trust boundaries when material. Mark inferred elements in text; color alone cannot encode confidence.
+- Do not copy a reference's overlapping labels, tiny typography, or unsupported pipeline steps.
+
+## Producing the presentation image
+
+Mermaid remains the portable architecture source and its rendered SVG remains required. Its layout and icon support may not reproduce an icon-led infographic faithfully.
+
+For overview mode, also create `diagrams/project-overview-infographic.svg`: an editable, self-contained vector composition from the same architecture model. For deep mode, make a companion only for views that benefit from this treatment or when requested. Use native SVG paths, shapes, and text with a viewBox; keep labels as text and include a title and description. Use locally available licensed icons or simple authored pictograms, with no remote fonts, images, scripts, or external asset dependencies. Keep model IDs on component groups and relationship elements to help cross-check fidelity.
+
+The companion is a restyling of the same view, not an extra architecture view. Preserve its components, relationships, directions, confidence, and meaningful boundaries. Embed it prominently in the overview document and link the portable diagram alongside it. If PNG export is available, also export a high-resolution PNG for sharing while retaining the SVG. Never substitute a raster illustration for the evidence-backed diagram.
+
+Render and visually inspect the companion at intended display size, compare it to the model, and record its verification separately. If tools cannot render or inspect it, report that limitation rather than claiming visual verification. Do not silently replace a renderer-produced SVG with a hand-authored companion.
+
+## Optional multicolor palette
 
 | Category | Fill / Border | Meaning |
 |---|---|---|
@@ -20,9 +40,9 @@ Use a hybrid of colorful teaching clarity and enterprise architecture discipline
 
 Color is never the only carrier of meaning. Use descriptive node labels and named boundaries. Do not add color legends or color-key panels.
 
-## Portable icons
+## Optional emoji fallback
 
-Use recognizable portable icons when vendor icon packs are unavailable:
+Only when a multicolor style is requested or acceptable, use recognizable portable icons:
 
 `👤` actor · `📱` mobile · `🌐` web · `🖥️` desktop · `⚙️` service · `🧩` module · `🧠` AI · `🗄️` DB · `💾` storage/cache · `📨` queue · `🔐` auth · `☁️` infra · `🔌` external API · `🔔` notifications · `📈` observability · `🚀` CI/CD · `🧪` tests/evals.
 
@@ -66,7 +86,7 @@ Use context for people/systems, container for apps/services/stores, component on
 
 ## Mermaid
 
-Prefer `flowchart LR` or `flowchart TB` for portable controllable diagrams. Use `subgraph`, semantic `classDef`, explicit IDs, concise labels, and sparing `<br/>`.
+Prefer `flowchart LR` or `flowchart TB` for portable controllable diagrams. Use `subgraph`, consistent `classDef`, explicit IDs, concise labels, and sparing `<br/>`. For the default style, use white fills and the same accent stroke across categories. The example below illustrates the optional multicolor style.
 
 Example:
 

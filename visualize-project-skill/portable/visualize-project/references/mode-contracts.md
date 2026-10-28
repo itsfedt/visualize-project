@@ -18,8 +18,11 @@ docs/architecture/generated/
 ├── OVERVIEW.md
 └── diagrams/
     ├── project-overview.mmd
-    └── project-overview.svg
+    ├── project-overview.svg
+    └── project-overview-infographic.svg
 ```
+
+The infographic is an editable presentation companion of the same overview, following `visual-language.md`; inspect it separately and embed it prominently. Export a PNG as well when available.
 
 If one diagram cannot remain clean, add at most one supplemental overview view rather than shrinking labels.
 
