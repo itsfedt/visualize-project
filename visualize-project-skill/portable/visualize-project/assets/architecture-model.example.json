@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-01-01T00:00:00Z",
+  "project": {"name": "Example Project", "scope": "repository", "mode": "overview"},
+  "actors": [
+    {"id": "actor-user", "name": "End User", "description": "Uses the application.", "evidence": ["README.md"], "confidence": "verified"}
+  ],
+  "components": [
+    {"id": "client", "name": "Client App", "type": "frontend", "technology": ["Example UI"], "responsibility": "User interface.", "ownership": "project", "runtime": "client", "deployment_environment": ["production"], "evidence": ["src/client"], "confidence": "verified", "tags": ["client"]},
+    {"id": "api", "name": "Application API", "type": "backend", "technology": ["Example API"], "responsibility": "Business API.", "ownership": "project", "runtime": "server", "deployment_environment": ["production"], "evidence": ["src/api"], "confidence": "verified", "tags": ["api"]},
+    {"id": "db", "name": "Primary Database", "type": "database", "technology": ["PostgreSQL"], "responsibility": "Persistent application data.", "ownership": "managed", "runtime": "managed-service", "deployment_environment": ["production"], "evidence": ["db/migrations"], "confidence": "verified", "tags": ["data"]}
+  ],
+  "relationships": [
+    {"id": "user-client", "source": "actor-user", "target": "client", "direction": "source-to-target", "kind": "sync-request", "label": "Interacts with", "protocol": "UI", "data": [], "evidence": ["README.md"], "confidence": "verified"},
+    {"id": "client-api", "source": "client", "target": "api", "direction": "source-to-target", "kind": "sync-request", "label": "Calls API", "protocol": "HTTPS/JSON", "data": ["application requests"], "evidence": ["src/client/api.ts"], "confidence": "verified"},
+    {"id": "api-db", "source": "api", "target": "db", "direction": "source-to-target", "kind": "data-write", "label": "Reads/Writes", "protocol": "SQL", "data": ["application data"], "evidence": ["src/api/repository.ts"], "confidence": "verified"}
+  ],
+  "boundaries": [],
+  "runtime_flows": [],
+  "findings": [],
+  "unknowns": []
+}
