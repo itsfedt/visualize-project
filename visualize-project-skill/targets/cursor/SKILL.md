@@ -226,7 +226,7 @@ Use a hybrid of:
 
 Every diagram must:
 - have a descriptive title and scope;
-- include a legend/key;
+- omit color legends and color-key panels; use clear node labels and named boundaries;
 - use icons where they aid recognition;
 - use a consistent semantic color palette;
 - label every meaningful arrow;
@@ -308,9 +308,8 @@ Reject and revise diagrams that have:
 - unreadably small labels;
 - excessive edge crossings;
 - ambiguous arrows;
-- duplicated/conflicting legends;
 - unbalanced whitespace that obscures hierarchy;
-- color meanings missing from the legend;
+- meaning conveyed only by color without clear labels;
 - visually indistinguishable boundaries;
 - too many elements for the selected mode.
 

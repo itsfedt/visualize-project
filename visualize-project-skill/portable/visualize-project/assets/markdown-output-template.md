@@ -12,12 +12,6 @@ Describe the project in 3–6 sentences.
 
 Explain direction, boundaries, colors, and line styles.
 
-## Legend
-
-| Visual | Meaning |
-|---|---|
-| ... | ... |
-
 ## Components
 
 | Component | Type | Technology | Responsibility | Confidence |

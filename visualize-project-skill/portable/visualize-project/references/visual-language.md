@@ -18,7 +18,7 @@ Use a hybrid of colorful teaching clarity and enterprise architecture discipline
 | Observability | `#FCE7F3` / `#DB2777` | Logs/metrics/analytics |
 | External | `#F1F5F9` / `#64748B` | Third-party systems |
 
-Color is never the only carrier of meaning; include a legend.
+Color is never the only carrier of meaning. Use descriptive node labels and named boundaries. Do not add color legends or color-key panels.
 
 ## Portable icons
 
@@ -41,7 +41,7 @@ Recommended line semantics:
 - dashed: asynchronous event/message;
 - dotted: build/deploy/observability/control-plane.
 
-Document the convention in the legend.
+Label relationships directly so their meaning is clear without a legend.
 
 ## Boundaries
 

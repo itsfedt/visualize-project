@@ -15,7 +15,7 @@ This gives the agent a shared basis for diagrams. It does not mechanically
 prevent model-to-diagram contradictions; evidence and visual review remain necessary.
 
 Modes are intentionally asymmetric:
-- `overview` gives one recognizable architecture map plus explanation and legend.
+- `overview` gives one recognizable architecture map plus concise explanation.
 - `deep` creates an architecture atlas with C4-style zoom levels and supporting runtime/deployment/security/CI views only when evidence warrants them.
 
 Mermaid is the primary portable source format. D2 is optional for dense layouts.

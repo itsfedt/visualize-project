@@ -32,7 +32,7 @@ def fixture(root):
     diagrams = root / "diagrams"
     diagrams.mkdir(exist_ok=True)
     (diagrams / "project-overview.mmd").write_text(
-        'flowchart LR\nclient -->|Calls API| api\nclassDef service fill:#fff\n%% legend: service\n', encoding="utf-8")
+        'flowchart LR\nclient -->|Calls API| api\nclassDef service fill:#fff\n', encoding="utf-8")
     (diagrams / "project-overview.svg").write_text(
         '<svg xmlns="http://www.w3.org/2000/svg"><text x="10" y="20">Structural fixture only</text></svg>', encoding="utf-8")
     (root / "OVERVIEW.md").write_text(

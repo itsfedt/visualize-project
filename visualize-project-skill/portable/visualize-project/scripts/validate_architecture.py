@@ -215,8 +215,6 @@ def main() -> int:
                 text = src.read_text(encoding="utf-8", errors="replace")
                 if "classDef" not in text:
                     warnings.append(f"{src.name}: no semantic classDef styling found")
-                if "legend" not in text.lower():
-                    warnings.append(f"{src.name}: no obvious in-diagram legend marker")
                 for i, line in enumerate(text.splitlines(), start=1):
                     s = line.strip()
                     if "-->" in s and "|" not in s and not s.startswith(("%%", "class ", "linkStyle ")):

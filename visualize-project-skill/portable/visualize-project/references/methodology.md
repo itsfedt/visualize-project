@@ -2,7 +2,7 @@
 
 This skill uses C4-style zoom levels to avoid forcing different abstraction levels into a single diagram. Useful views include System Context, Container/application landscape, Component (only where useful), Dynamic/runtime flow, and Deployment.
 
-Architecture diagrams should be self-describing: title/scope, legend, named/typed elements, responsibilities, technology where relevant, directional labelled relationships, and protocols where relevant.
+Architecture diagrams should be self-describing: title/scope, named/typed elements, responsibilities, technology where relevant, directional labelled relationships, and protocols where relevant.
 
 Mermaid is the default portable diagram source. Ordinary flowcharts are favored when they provide better cross-renderer portability and semantic styling.
 

@@ -37,12 +37,11 @@ Include:
 1. architecture summary;
 2. rendered image;
 3. how to read it;
-4. legend;
-5. major components table;
-6. concise main flows;
-7. verified vs inferred summary;
-8. important unknowns/contradictions;
-9. verification status.
+4. major components table;
+5. concise main flows;
+6. verified vs inferred summary;
+7. important unknowns/contradictions;
+8. verification status.
 
 # Deep — Full Package
 

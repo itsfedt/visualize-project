@@ -53,7 +53,7 @@ Open every SVG/PNG and check:
 - labels stay associated with their edges;
 - main hierarchy is obvious quickly;
 - external systems are separated;
-- legend matches colors/styles;
+- no color legend or color-key panel is included;
 - no large unexplained dead zones;
 - no cramped clusters;
 - no gratuitous decoration.
@@ -70,7 +70,7 @@ Ask:
 - Is every relationship labelled?
 - Does label agree with direction?
 - Is protocol shown for inter-process communication?
-- Does legend explain colors/icons/line styles/boundaries?
+- Do labels and named boundaries communicate meaning without relying on color?
 
 ## Mode cleanliness
 
