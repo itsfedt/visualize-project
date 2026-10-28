@@ -71,6 +71,11 @@ def main() -> int:
         print(f"ERROR: {exc}")
         return 1
     print(f"Installed visualize-project for {args.target}: {dest}")
+    print("Open the repository you want to map in your agent; start a new session if needed.")
+    if args.target == "codex":
+        print("Next: select visualize-project in the skill picker and request overview.")
+    else:
+        print("Next: /visualize-project overview")
     return 0
 
 if __name__=="__main__":

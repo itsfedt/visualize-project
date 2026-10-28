@@ -1,26 +1,59 @@
 # Install Visualize Project
 
-This distribution contains one portable skill with native installation targets for Cursor, Claude Code, and Codex.
+## Quick install
 
-Requires Python 3.12 or newer. The installer and validator have no third-party
-Python dependencies. A supported coding-agent host is required to execute the
-skill; copying files alone does not generate architecture diagrams. Host
-discovery and invocation syntax must be confirmed in your installed host version.
+Requires Git and Python 3.12+. From your terminal:
 
-## Automatic installation
-
-From the extracted distribution directory:
-
-```bash
-python install.py --target cursor --scope user
-python install.py --target claude --scope user
-python install.py --target codex --scope user
+```sh
+git clone https://github.com/itsfedt/visualize-project.git
+cd visualize-project
+python visualize-project-skill/install.py --target claude
 ```
 
-Use `--scope project --project-root /path/to/repo` to install only for one repository.
+Choose `--target cursor` or `--target codex` for those agents. Use `python3`
+if that is your Python command. The default installs for your user account.
+No Python packages or application configuration are needed.
 
-From the outer repository root, use `python visualize-project-skill/install.py`
-instead of `python install.py`. Paths containing spaces must be quoted.
+After installation, open a repository in your agent and run
+`/visualize-project overview`. In Codex, select the skill in the skill picker
+and request `overview`. Start a new agent session if it does not appear.
+
+## Instructions for an installing agent
+
+When the user asks you to install this repository's skill:
+
+1. Use the user's named host (`claude`, `cursor`, or `codex`). If none is named
+   and you cannot identify your host, ask which one. Check for Python 3.12+;
+   use `python3` if necessary. If unavailable, explain the prerequisite before
+   changing the machine's Python installation.
+2. Clone `https://github.com/itsfedt/visualize-project.git` into an unused scratch
+   directory, or use an existing checkout of this repository. From its root,
+   run `python visualize-project-skill/install.py --target <host>`. The default
+   is user scope; honor project scope if the user requests it. Preserve an
+   existing installation: do not add `--force` unless replacement is authorized.
+3. Confirm exit code 0 and the reported destination contains `SKILL.md`,
+   `references/`, `assets/`, and `scripts/validate_architecture.py`. Tell the
+   user the destination and how to invoke overview. Report host discovery as
+   unverified unless actually checked; do not generate diagrams as part of
+   installation unless requested.
+
+The installer needs the whole repository, not just a downloaded `install.py`.
+It selects the appropriate host wrapper and copies the supporting files.
+Host approval requirements still apply. Installation does not require running
+the contributor test suite or downloading a diagram renderer.
+
+## Project-only installation
+
+From this repository root, append the scope and destination:
+
+```sh
+python visualize-project-skill/install.py --target claude --scope project --project-root "/path/to/your/repo"
+```
+
+If working from the inner `visualize-project-skill` distribution folder, use
+`python install.py` instead. Quote paths containing spaces.
+
+## Updates and recovery
 
 An existing installation is preserved unless `--force` is supplied. Replacement
 stages a complete copy first, then renames the old version to a sibling

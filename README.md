@@ -6,20 +6,56 @@ This is an **agent skill**, not a standalone diagram generator. Its distinguishi
 
 **Status:** development preview. Utility regression tests exist; cross-host agent behavior and diagram quality have not yet been independently evaluated. Do not treat validator success as proof of factual accuracy or visual quality.
 
-## First use
+## Install
 
-Prerequisites: Python **3.12+** and a coding agent that can load local skills, read repository files, and run commands. The Python utilities use only the standard library; there is no pip install step, server, API key, or database configuration.
+### Ask your agent
 
-From this repository root:
+Paste this into Claude Code:
 
-```sh
-python -m unittest discover -s visualize-project-skill/tests -v
-python visualize-project-skill/install.py --target codex --scope project --project-root /absolute/path/to/your/repo
+```text
+Install the visualize-project skill for Claude Code from
+https://github.com/itsfedt/visualize-project
+Follow visualize-project-skill/INSTALL.md in that repository.
+Install it for my user account and preserve any existing installation.
 ```
 
-Choose `cursor`, `claude`, or `codex`. Use an existing scratch repository for your first attempt. See [installation](visualize-project-skill/INSTALL.md) for paths, replacement behavior, and host caveats. Reload the host's skill discovery after installation if needed.
+For Cursor or Codex, replace “Claude Code” with your agent's name. The agent
+handles downloading and installation using the same installer below.
 
-In your coding agent, select the installed `visualize-project` skill and request `overview`. The target instructions describe intended command forms. Use `deep` for separate context, container, and other evidence-supported views.
+### Or run three commands
+
+Requires Git and Python **3.12+**. Run these in your terminal:
+
+```sh
+git clone https://github.com/itsfedt/visualize-project.git
+cd visualize-project
+python visualize-project-skill/install.py --target claude
+```
+
+Use `--target cursor` or `--target codex` for those agents. On systems where
+Python is named `python3`, use `python3` in the last command. No pip install,
+API key, or configuration file is needed. Installation is for your user account,
+so the skill is available across projects.
+
+## Use
+
+Open the repository you want to map in your agent. Start a new session if the
+skill is not discovered, then invoke:
+
+```text
+/visualize-project overview
+```
+
+For Codex, select `visualize-project` in the skill picker and request `overview`.
+Use `deep` instead for a multi-diagram architecture atlas.
+
+The agent handles generating and validating the output. Rendering needs Mermaid
+CLI or D2; the skill can request transient Mermaid execution when your host
+allows it. If rendering is unavailable, it must report incomplete verification.
+
+[Project-only installation, updates, uninstall, and troubleshooting](visualize-project-skill/INSTALL.md)
+
+## Output and verification
 
 Expected overview output in the analyzed repository:
 
