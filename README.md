@@ -16,7 +16,7 @@ Paste this into Claude Code:
 Install the visualize-project skill for Claude Code from
 https://github.com/itsfedt/visualize-project
 Follow visualize-project-skill/INSTALL.md in that repository.
-Install it for my user account and preserve any existing installation.
+Install it for my user account, upgrading it if already installed.
 ```
 
 For Cursor or Codex, replace “Claude Code” with your agent's name. The agent
@@ -35,7 +35,9 @@ python visualize-project-skill/install.py --target claude
 Use `--target cursor` or `--target codex` for those agents. On systems where
 Python is named `python3`, use `python3` in the last command. No pip install,
 API key, or configuration file is needed. Installation is for your user account,
-so the skill is available across projects.
+so the skill is available across projects. Running the installer again upgrades
+an existing installation. Personal edits inside the installed skill directory
+are replaced.
 
 ## Use
 

@@ -122,6 +122,11 @@ class InstallerTests(unittest.TestCase):
                                          "--scope", "project", "--project-root", str(self.root)],
                                         cwd=self.root, capture_output=True, text=True)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                upgraded = subprocess.run([sys.executable, str(distribution / "install.py"), "--target", target,
+                                           "--scope", "project", "--project-root", str(self.root)],
+                                          cwd=self.root, capture_output=True, text=True)
+                self.assertEqual(upgraded.returncode, 0, upgraded.stdout + upgraded.stderr)
+                self.assertIn("Upgraded visualize-project", upgraded.stdout)
                 dest = self.root / f".{target}" / "skills" / "visualize-project"
                 self.assertEqual((dest / "SKILL.md").read_bytes(), (ROOT / "targets" / target / "SKILL.md").read_bytes())
                 for source in PORTABLE.rglob("*"):
@@ -132,14 +137,13 @@ class InstallerTests(unittest.TestCase):
                 fixture(output)
                 self.assertEqual(run_validator(output, dest / "scripts" / "validate_architecture.py").returncode, 0)
 
-    def test_existing_install_requires_force(self):
+    def test_existing_install_is_upgraded_by_default(self):
         installer.install(PORTABLE, self.wrapper, self.dest)
         marker = self.dest / "custom.txt"
         marker.write_text("keep")
-        with self.assertRaises(ValueError):
-            installer.install(PORTABLE, self.wrapper, self.dest)
-        self.assertEqual(marker.read_text(), "keep")
-        installer.install(PORTABLE, self.wrapper, self.dest, True)
+        (self.dest / "SKILL.md").write_text("old version")
+        installer.install(PORTABLE, self.wrapper, self.dest)
+        self.assertEqual((self.dest / "SKILL.md").read_bytes(), self.wrapper.read_bytes())
         self.assertFalse(marker.exists())
 
     def test_copy_failure_preserves_previous_install(self):
@@ -147,7 +151,7 @@ class InstallerTests(unittest.TestCase):
         (self.dest / "custom.txt").write_text("keep")
         with patch.object(installer.shutil, "copytree", side_effect=OSError("disk full")):
             with self.assertRaises(OSError):
-                installer.install(PORTABLE, self.wrapper, self.dest, True)
+                installer.install(PORTABLE, self.wrapper, self.dest)
         self.assertEqual((self.dest / "custom.txt").read_text(), "keep")
 
     def test_publish_failure_rolls_back(self):
@@ -162,20 +166,20 @@ class InstallerTests(unittest.TestCase):
 
         with patch.object(Path, "rename", fail_publish):
             with self.assertRaises(OSError):
-                installer.install(PORTABLE, self.wrapper, self.dest, True)
+                installer.install(PORTABLE, self.wrapper, self.dest)
         self.assertEqual((self.dest / "custom.txt").read_text(), "keep")
 
     def test_missing_wrapper_preserves_previous_install(self):
         self.dest.mkdir()
         (self.dest / "custom.txt").write_text("keep")
         with self.assertRaises(ValueError):
-            installer.install(PORTABLE, self.root / "missing", self.dest, True)
+            installer.install(PORTABLE, self.root / "missing", self.dest)
         self.assertEqual((self.dest / "custom.txt").read_text(), "keep")
 
     def test_linked_destination_is_rejected(self):
         with patch.object(Path, "is_symlink", return_value=True):
             with self.assertRaisesRegex(ValueError, "linked destination"):
-                installer.install(PORTABLE, self.wrapper, self.dest, True)
+                installer.install(PORTABLE, self.wrapper, self.dest)
         self.assertFalse(self.dest.exists())
 
     def test_backup_is_preserved_for_manual_recovery(self):

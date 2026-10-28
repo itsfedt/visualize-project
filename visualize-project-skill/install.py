@@ -16,7 +16,7 @@ PROJECT_PATHS = {
     "codex": Path(".codex")/"skills"/"visualize-project",
 }
 
-def install(portable: Path, wrapper: Path, dest: Path, force: bool = False) -> None:
+def install(portable: Path, wrapper: Path, dest: Path) -> None:
     """Stage a complete install before replacing a previous version.
 
     Callers must serialize installs to the same destination. Rollback handles
@@ -27,8 +27,6 @@ def install(portable: Path, wrapper: Path, dest: Path, force: bool = False) -> N
             raise ValueError(f"Refusing linked destination path: {path}")
     if dest.exists() and not dest.is_dir():
         raise ValueError(f"Destination is not a directory: {dest}")
-    if dest.exists() and not force:
-        raise ValueError(f"Destination already exists: {dest}. Use --force to replace it.")
     if not portable.is_dir() or not wrapper.is_file():
         raise ValueError("Incomplete distribution: portable skill or target wrapper missing")
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -57,7 +55,8 @@ def main() -> int:
     ap.add_argument("--target", choices=HOME_PATHS, required=True)
     ap.add_argument("--scope", choices=["user","project"], default="user")
     ap.add_argument("--project-root", default=".")
-    ap.add_argument("--force", action="store_true")
+    # Accept older upgrade commands; replacement is now the default.
+    ap.add_argument("--force", action="store_true", help=argparse.SUPPRESS)
     args=ap.parse_args()
 
     here=Path(__file__).resolve().parent
@@ -65,12 +64,14 @@ def main() -> int:
     wrapper=here/"targets"/args.target/"SKILL.md"
     dest=HOME_PATHS[args.target] if args.scope=="user" else Path(args.project_root).resolve()/PROJECT_PATHS[args.target]
 
+    upgrading = dest.exists()
     try:
-        install(portable, wrapper, dest, args.force)
+        install(portable, wrapper, dest)
     except (OSError, ValueError) as exc:
         print(f"ERROR: {exc}")
         return 1
-    print(f"Installed visualize-project for {args.target}: {dest}")
+    action = "Upgraded" if upgrading else "Installed"
+    print(f"{action} visualize-project for {args.target}: {dest}")
     print("Open the repository you want to map in your agent; start a new session if needed.")
     if args.target == "codex":
         print("Next: select visualize-project in the skill picker and request overview.")

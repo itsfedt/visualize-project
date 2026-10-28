@@ -29,8 +29,8 @@ When the user asks you to install this repository's skill:
 2. Clone `https://github.com/itsfedt/visualize-project.git` into an unused scratch
    directory, or use an existing checkout of this repository. From its root,
    run `python visualize-project-skill/install.py --target <host>`. The default
-   is user scope; honor project scope if the user requests it. Preserve an
-   existing installation: do not add `--force` unless replacement is authorized.
+   is user scope; honor project scope if the user requests it. An existing
+   installation uses staged replacement and upgrades automatically.
 3. Confirm exit code 0 and the reported destination contains `SKILL.md`,
    `references/`, `assets/`, and `scripts/validate_architecture.py`. Tell the
    user the destination and how to invoke overview. Report host discovery as
@@ -55,13 +55,26 @@ If working from the inner `visualize-project-skill` distribution folder, use
 
 ## Updates and recovery
 
-An existing installation is preserved unless `--force` is supplied. Replacement
+To upgrade from an existing checkout, run these commands from its root:
+
+```sh
+git pull
+python visualize-project-skill/install.py --target claude
+```
+
+Use the same target and scope as your original installation. The installer
+installs the version in your checkout; it does not download updates itself.
+Restart your agent session to load the updated skill.
+
+An existing installation is upgraded automatically. Replacement
 stages a complete copy first, then renames the old version to a sibling
 `visualize-project.backup` while publishing. Ordinary publish failures restore
 the old version. Do not run concurrent installs to the same destination. This is
 not a crash-safe transaction: after interruption, inspect any `.backup` folder
 before retrying. The installer refuses an existing backup and linked destination
-directories (symlinks/junctions). Back up personal changes before using `--force`.
+directories (symlinks/junctions). Personal edits and extra files inside the installed skill directory are replaced;
+back them up before upgrading. The old `--force` option is accepted for compatibility
+but is no longer required.
 
 To uninstall, remove only the installed `visualize-project` directory from the
 selected location below. Generated repository documentation is separate and is
